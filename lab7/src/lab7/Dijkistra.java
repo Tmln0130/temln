@@ -1,6 +1,6 @@
 package lab7;
 import java.util.ArrayList;
-
+йыбйыб
 public class Dijkistra {
     public static void main(String[] args) {
         // 1. ArrayList үүсгэх
