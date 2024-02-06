@@ -1,4 +1,4 @@
-';';package lab7;
+package lab7;
 import java.util.ArrayList;
 public class Dijkistra {
     public static void main(String[] args) {
@@ -10,7 +10,7 @@ public class Dijkistra {
         int sum = calculateSum(myList);
         System.out.println("Элементүүдийн нийлбэр: " + sum);
 
-        // 3. Элементүүдийг эрэмбэлэх
+        // 3. Элементүүдийг эрэмбэлэхkk
         ArrayList<Integer> reversedList = reverseList(myList);
         System.out.println("Элементүүдийг эрэмбэлэх: " + reversedList);
 
