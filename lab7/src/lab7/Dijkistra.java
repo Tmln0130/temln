@@ -1,13 +1,11 @@
 package lab7;
 
-
-
 public class Dijkistra {
     public static void main(String[] args) {
         // Матрицын хэмжээ
         int M = 3; // A матрицын мөр
         int K = 2; // A, B матрицын багана
-        int N = 3; // B матрицын мөр
+        int N = 3; // B матрицын hgfмөр
 
         // Матриц A, B болон үржвэр матриц C
         int[][] A = {{1, 4}, {2, 5}, {3, 6}};
