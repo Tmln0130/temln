@@ -14,7 +14,7 @@ public class Dijkistra {
         ArrayList<Integer> reversedList = reverseList(myList);
         System.out.println("Элементүүдийг эрэмбэлэх: " + reversedList);
 
-        // 4. Макс утга
+        // 4. Макс утгаlkjk
         int maxElement = findMaxElement(myList);
         System.out.println("Макс утга: " + maxElement);
 
