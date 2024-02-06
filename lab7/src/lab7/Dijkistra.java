@@ -1,5 +1,5 @@
 package lab7;
-
+asdfghjkl;
 public class Dijkistra {
     public static void main(String[] args) {
         // Матрицын хэмжээ
