@@ -1,4 +1,4 @@
-package lab7;
+';';package lab7;
 import java.util.ArrayList;
 public class Dijkistra {
     public static void main(String[] args) {
