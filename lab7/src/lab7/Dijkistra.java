@@ -18,7 +18,7 @@ public class Dijkistra {
         int maxElement = findMaxElement(myList);
         System.out.println("Макс утга: " + maxElement);
 
-        // 5. Элементүүдийг квадрат
+        // 5. Элементүүдийн квадрат
         ArrayList<Integer> squaredList = squareElements(myList);
         System.out.println("Элементүүдийг квадрат: " + squaredList);
 
