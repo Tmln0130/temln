@@ -1,85 +1,90 @@
 package lab7;
-asdfghjkl;
+import java.util.ArrayList;
+
 public class Dijkistra {
     public static void main(String[] args) {
-        // Матрицын хэмжээ
-        int M = 3; // A матрицын мөр
-        int K = 2; // A, B матрицын багана
-        int N = 3; // B матрицын hgfмөр
+        // 1. ArrayList үүсгэх
+        ArrayList<Integer> myList = createList();
+        System.out.println("Created list: " + myList);
 
-        // Матриц A, B болон үржвэр матриц C
-        int[][] A = {{1, 4}, {2, 5}, {3, 6}};
-        int[][] B = {{8, 7, 6}, {5, 4, 3}};
-        int[][] C = new int[M][N];
+        // 2. Элементүүдийн нийлбэр 
+        int sum = calculateSum(myList);
+        System.out.println("Элементүүдийн нийлбэр: " + sum);
 
-        // Worker thread-үүдийн массив
-        Thread[] workers = new Thread[M * N];
+        // 3. Элементүүдийг эрэмбэлэх
+        ArrayList<Integer> reversedList = reverseList(myList);
+        System.out.println("Элементүүдийг эрэмбэлэх: " + reversedList);
 
-        // Матрицын үржвэр
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                C[i][j] = 0;
+        // 4. Макс утга
+        int maxElement = findMaxElement(myList);
+        System.out.println("Макс утга: " + maxElement);
 
-                // Тухайн элементийн үржвэрт ашиглагддаг worker thread-ийг үүсгэнэ
-                workers[i * N + j] = new Thread(new WorkThread(i, j, A, B, C));
+        // 5. Элементүүдийг квадрат
+        ArrayList<Integer> squaredList = squareElements(myList);
+        System.out.println("Элементүүдийг квадрат: " + squaredList);
 
-                // Worker thread-ийг эхлүүлэх
-                workers[i * N + j].start();
-            }
-        }
-
-        // Бүх worker thread-ийг холбох
-        try {
-            for (Thread worker : workers) {
-                worker.join();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Матрицуудыг хэвлэх
-        System.out.println("Матриц A:");
-        printMatrix(A);
-
-        System.out.println("\nМатриц B:");
-        printMatrix(B);
-
-        System.out.println("\nМатриц C (A * B):");
-        printMatrix(C);
+        // 6. Сондгой тоо
+        ArrayList<Integer> evenNumbers = filterEvenNumbers(myList);
+        System.out.println("Сондгой тоо: " + evenNumbers);
     }
 
-    // Матрицыг хэвлэх функц
-    private static void printMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print(matrix[i][j] + " ");
+    // 1. ArrayList үүсгэх
+    public static ArrayList<Integer> createList() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        return list;
+    }
+
+    // 2. Элементүүдийн нийлбэр олгох
+    public static int calculateSum(ArrayList<Integer> list) {
+        int sum = 0;
+        for (int num : list) {
+            sum += num;
+        }
+        return sum;
+    }
+
+    // 3. Элементүүдийг эрэмбэлэх
+    public static ArrayList<Integer> reverseList(ArrayList<Integer> list) {
+        ArrayList<Integer> reversed = new ArrayList<>();
+        for (int i = list.size() - 1; i >= 0; i--) {
+            reversed.add(list.get(i));
+        }
+        return reversed;
+    }
+
+    // 4. Макс утга
+    public static int findMaxElement(ArrayList<Integer> list) {
+        int max = Integer.MIN_VALUE;
+        for (int num : list) {
+            if (num > max) {
+                max = num;
             }
-            System.out.println();
         }
-    }
-}
-
-// Worker thread класс, тухайн элементийн үржүүлэхийн тулд Runnable интерфейс ашиглаж байна
-class WorkThread implements Runnable {
-    private int row;
-    private int col;
-    private int[][] A;
-    private int[][] B;
-    private int[][] C;
-
-    public WorkThread(int row, int col, int[][] A, int[][] B, int[][] C) {
-        this.row = row;
-        this.col = col;
-        this.A = A;
-        this.B = B;
-        this.C = C;
+        return max;
     }
 
-    // Run метод нь тухайн worker thread-ээр хийгдэх үйлдлийг тодорхойлох функц
-    public void run() {
-        // C[row][col] дахь матрицын үржвэрийг тооцоолох
-        for (int k = 0; k < A[0].length; k++) {
-            C[row][col] += A[row][k] * B[k][col];
+    // 5. Элементүүдийг квадрат
+    public static ArrayList<Integer> squareElements(ArrayList<Integer> list) {
+        ArrayList<Integer> squared = new ArrayList<>();
+        for (int num : list) {
+            squared.add(num * num);
         }
+        return squared;
+    }
+
+    // 6. Сондгой тоо
+    public static ArrayList<Integer> filterEvenNumbers(ArrayList<Integer> list) {
+        ArrayList<Integer> evenNumbers = new ArrayList<>();
+        for (int num : list) {
+            if (num % 2 == 1) {
+                evenNumbers.add(num);
+            }
+        }
+        return evenNumbers;
     }
 }
