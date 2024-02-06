@@ -1,5 +1,7 @@
 package lab7;
 import java.util.ArrayList;
+import java.util.Collections;
+
 public class Dijkistra {
     public static void main(String[] args) {
         // 1. ArrayList үүсгэх
@@ -10,11 +12,11 @@ public class Dijkistra {
         int sum = calculateSum(myList);
         System.out.println("Элементүүдийн нийлбэр: " + sum);
 
-        // 3. Элементүүдийг эрэмбэлэхkk
-        ArrayList<Integer> reversedList = reverseList(myList);
+        // 3. Элементүүдийг эрэмбэлэх
+        ArrayList<Integer> reversedList = sortDescList(myList);
         System.out.println("Элементүүдийг эрэмбэлэх: " + reversedList);
 
-        // 4. Макс утгаlkjk
+        // 4. Макс утга
         int maxElement = findMaxElement(myList);
         System.out.println("Макс утга: " + maxElement);
 
@@ -33,7 +35,7 @@ public class Dijkistra {
         list.add(1);
         list.add(2);
         list.add(3);
-        list.add(4);
+        list.add(8);
         list.add(5);
         return list;
     }
@@ -48,12 +50,10 @@ public class Dijkistra {
     }
 
     // 3. Элементүүдийг эрэмбэлэх
-    public static ArrayList<Integer> reverseList(ArrayList<Integer> list) {
-        ArrayList<Integer> reversed = new ArrayList<>();
-        for (int i = list.size() - 1; i >= 0; i--) {
-            reversed.add(list.get(i));
-        }
-        return reversed;
+    public static ArrayList<Integer> sortDescList(ArrayList<Integer> list) {
+        ArrayList<Integer> sortedDesc = new ArrayList<>(list);
+        Collections.sort(sortedDesc, Collections.reverseOrder());
+        return sortedDesc;
     }
 
     // 4. Макс утга
@@ -85,5 +85,5 @@ public class Dijkistra {
             }
         }
         return evenNumbers;
-    }
+    }//4:33
 }
