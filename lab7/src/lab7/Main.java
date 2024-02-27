@@ -11,7 +11,7 @@ public class Main {
             System.out.println("\nХийх үйлдэлээ сонгоно уу:");
             System.out.println("1. Нэмэх");
             System.out.println("2. Хасах");
-            System.out.println("3. Front");
+            System.out.println("3. Эхэнд");
             System.out.println("4. Хэмжээ");
             System.out.println("5. Харуулах");
             System.out.println("6. Цэвэрлэх");
@@ -63,4 +63,4 @@ public class Main {
             }
         }
     }
-}
+}//4:29
