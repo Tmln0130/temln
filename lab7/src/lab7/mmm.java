@@ -140,30 +140,11 @@ class GraphProblem extends Problem {
         return costSoFar + (graph.get(A).getOrDefault(B, Integer.MAX_VALUE));
     }
 
-    int findMinEdge() {
-        int minDistance = Integer.MAX_VALUE;
-        for (Map<String, Integer> d : graph.graphDict.values()) {
-            int localMin = d.values().stream().min(Comparator.naturalOrder()).orElse(Integer.MAX_VALUE);
-            minDistance = Math.min(minDistance, localMin);
-        }
-        return minDistance;
-    }
-
     int h(Node node) {
-        Map<String, Integer> locs = graph.graphDict.get("locations");
-        if (locs != null) {
-            if (node.state instanceof String) {
-                // Assuming "distance" method calculates distance between two points
-                return (int) distance(locs.get(node.state), locs.get(goal));
-            }
-            // Assuming "distance" method calculates distance between two points
-            return (int) distance(locs.get(node.state), locs.get(goal));
-        } else {
-            return Integer.MAX_VALUE;
-        }
+        // Placeholder for distance calculation
+        return 0;
     }
-}
-
+}	
 class GraphProblemStochastic extends GraphProblem {
     GraphProblemStochastic(String initial, String goal, Graph graph) {
         super(initial, goal, graph);
