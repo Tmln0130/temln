@@ -1,113 +1,106 @@
-package lab7;
 import java.util.Scanner;
 
-public class Registration {
-    String name;
-    String reg_no;
-    int balance, amount_paid, fullFees, total;
-    int maths, eng, kisw, scie, ss;
-    char mathsg, engg, kiswg, scieg, ssg, totalg;
+public class Student {
+    private String name;
+    private String regNo;
+    private int feesPaid;
+    private int balance;
+    private int[] marks = new int[5];
+    private char[] grades = new char[5];
+    private int totalMarks;
+    private char totalGrade;
 
-    public void Students_details() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter your name:");
-        name = in.nextLine();
-        System.out.println("Enter your registration number:");
-        reg_no = in.nextLine();
+    public void setStudentDetails() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter student name:");
+        this.name = scanner.nextLine();
+        System.out.println("Enter registration number:");
+        this.regNo = scanner.nextLine();
     }
 
-    public void fees(int fullFees) {
-        Scanner in = new Scanner(System.in);
-        this.fullFees = fullFees;
+    public void setFees(int fullFees) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the amount of fees paid:");
-        amount_paid = in.nextInt();
-        balance = fullFees - amount_paid;
-        if (balance == 0) {
+        this.feesPaid = scanner.nextInt();
+        this.balance = fullFees - this.feesPaid;
+        if (this.balance == 0) {
             System.out.println("You have paid your school fees in full.");
-        } else if (balance > 0) {
-            System.out.println("You have a balance of: " + balance);
+        } else if (this.balance > 0) {
+            System.out.println("You have a balance of: " + this.balance);
         } else {
-            System.out.println("You have completed your fees payment and you have an overpayment of: " + balance);
+            System.out.println("You have completed your fees payment and you have an overpayment of: " + this.balance);
         }
     }
 
-    public void kcpe_marks() {
-        String arr[] = {"Maths", "English", "Kiswahili", "Science", "S/S and CRE"};
-        int marks[] = new int[5];
-        char grade[] = new char[5];
-        Scanner in = new Scanner(System.in);
-        boolean isrunning;
-        do {
-            isrunning = false;
-            for (int i = 0; i < arr.length; i++) {
-                System.out.println("Enter your marks for: " + arr[i]);
-                marks[i] = in.nextInt();
-                if (marks[i] <= 100 && marks[i] >= 0) {
-                    if (marks[i] > 80) {
-                        grade[i] = 'A';
-                    } else if (marks[i] > 60) {
-                        grade[i] = 'B';
-                    } else if (marks[i] > 50) {
-                        grade[i] = 'C';
-                    } else if (marks[i] > 40) {
-                        grade[i] = 'D';
-                    } else {
-                        grade[i] = 'E';
-                    }
+    public void inputMarks() {
+        Scanner scanner = new Scanner(System.in);
+        String[] subjects = {"Maths", "English", "Kiswahili", "Science", "S/S and CRE"};
+        for (int i = 0; i < subjects.length; i++) {
+            boolean validInput = false;
+            do {
+                System.out.println("Enter marks for " + subjects[i] + ":");
+                int mark = scanner.nextInt();
+                if (mark >= 0 && mark <= 100) {
+                    this.marks[i] = mark;
+                    validInput = true;
                 } else {
-                    System.out.println("You have entered values not in range!! \nPlease enter the values again!!");
-                    isrunning = true;
-                    break;
+                    System.out.println("Invalid input! Marks should be between 0 and 100.");
                 }
-
-            }
-        } while (isrunning);
-
-        maths = marks[0];
-        eng = marks[1];
-        kisw = marks[2];
-        scie = marks[3];
-        ss = marks[4];
-        total = marks[0] + marks[1] + marks[2] + marks[3] + marks[4];
-        if (total >= 400 && total <= 500) {
-            totalg = 'A';
-        } else if (total >= 300) {
-            totalg = 'B';
-        } else if (total > 200) {
-            totalg = 'C';
-        } else if (total > 100) {
-            totalg = 'D';
-        } else {
-            totalg = 'E';
+            } while (!validInput);
         }
-        mathsg = grade[0];
-        engg = grade[1];
-        kiswg = grade[2];
-        scieg = grade[3];
-        ssg = grade[4];
     }
 
-    public void records() {
+    public void calculateGrades() {
+        for (int i = 0; i < marks.length; i++) {
+            if (marks[i] >= 80) {
+                grades[i] = 'A';
+            } else if (marks[i] >= 60) {
+                grades[i] = 'B';
+            } else if (marks[i] >= 50) {
+                grades[i] = 'C';
+            } else if (marks[i] >= 40) {
+                grades[i] = 'D';
+            } else {
+                grades[i] = 'E';
+            }
+        }
+        totalMarks = 0;
+        for (int mark : marks) {
+            totalMarks += mark;
+        }
+        if (totalMarks >= 400) {
+            totalGrade = 'A';
+        } else if (totalMarks >= 300) {
+            totalGrade = 'B';
+        } else if (totalMarks >= 200) {
+            totalGrade = 'C';
+        } else if (totalMarks >= 100) {
+            totalGrade = 'D';
+        } else {
+            totalGrade = 'E';
+        }
+    }
+
+    public void displayStudentDetails() {
         System.out.println("Name: " + name);
-        System.out.println("Reg. No: " + reg_no);
-        System.out.println("Fees paid: " + amount_paid);
+        System.out.println("Reg. No: " + regNo);
+        System.out.println("Fees paid: " + feesPaid);
         System.out.println("Fee balance: " + balance);
-        System.out.println(
-                "KCPE Marks: " + "Maths: " + maths + "\nGrade: " + mathsg
-                        + "\nEnglish: " + eng + " \nGrade: " + engg
-                        + "\nKiswahili: " + kisw + " \nGrade: " + kiswg
-                        + "\nScience: " + scie + "\nGrade: " + scieg
-                        + "\nS/S and CRE: " + ss + " \nGrade: " + ssg
-                        + "\nTotal: " + total + "\nGrade: " + totalg
-        );
+        System.out.println("KCPE Marks:");
+        String[] subjects = {"Maths", "English", "Kiswahili", "Science", "S/S and CRE"};
+        for (int i = 0; i < subjects.length; i++) {
+            System.out.println(subjects[i] + ": " + marks[i] + " Grade: " + grades[i]);
+        }
+        System.out.println("Total Marks: " + totalMarks + " Grade: " + totalGrade);
     }
 
     public static void main(String[] args) {
-        Registration obj = new Registration();
-        int Fullfees = 26000;
-        obj.Students_details();
-        obj.fees(Fullfees);
-        obj.kcpe_marks();
-        obj.records();
+        Student student = new Student();
+        int fullFees = 26000;
+        student.setStudentDetails();
+        student.setFees(fullFees);
+        student.inputMarks();
+        student.calculateGrades();
+        student.displayStudentDetails();
     }
 }
